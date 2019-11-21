@@ -2,5 +2,5 @@ Rails.application.routes.draw do
   resources :images
   get 'home/home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'home#home'
+  root 'images#index'
 end
