@@ -9,4 +9,6 @@
 #
 
 class Image < ApplicationRecord
+	validates :url, presence: true,
+									image: 		true
 end
