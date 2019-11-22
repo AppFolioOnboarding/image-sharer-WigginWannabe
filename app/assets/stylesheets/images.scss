@@ -5,5 +5,45 @@
 .show-img-card {
 	max-height: 400px;
 	max-width: 400px;
+	object-fit: contain;
 	margin: auto;
+}
+
+abbr[title='required'] {
+	color: red;
+	text-decoration: none !important;
+}
+
+.form-inputs {
+
+	& .error {
+		margin-left: 8px;
+		padding-top: 8px;
+	}
+
+	& input {
+		padding: 4px;
+		width: 100%;
+		box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.4);
+		border-radius: 4px;
+	}
+}
+
+.form-actions input[type='submit'] {
+	margin: 16px 0;
+	background-color: rgba(0,0,0,.1);
+	transition: background-color 200ms;
+
+	&:hover {
+		background-color: rgba(0,0,0,.2);
+	}
+}
+
+#image_view {
+	height: 400px;
+	width: 400px;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

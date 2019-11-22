@@ -1,8 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<div class='card show-img-card'>
-  <img class='card-img-top' src='<%= @image.url %>'>
-</div>
+<%= render 'shared/image_view', url: @image.url %>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>
