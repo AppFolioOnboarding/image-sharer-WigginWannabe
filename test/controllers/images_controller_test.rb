@@ -1,8 +1,9 @@
 require 'test_helper'
+require 'mocha/test_unit'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @image = images(:one)
+    @image = Image.create(url: 'https://image.pbs.org/video-assets/x1WLcZn-asset-mezzanine-16x9-6kkb4dA.jpg')
   end
 
   test 'should get index' do
@@ -19,8 +20,16 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Image.count') do
       post images_url, params: { image: { url: @image.url } }
     end
-
     assert_redirected_to image_url(Image.last)
+  end
+
+  test 'should render new if image is invalid' do
+    Image.any_instance.stubs(:save).returns(false)
+
+    assert_no_difference('Image.count') do
+      post images_url, params: { image: { url: '' } }
+    end
+    assert_template :new
   end
 
   test 'should show image' do
@@ -36,6 +45,15 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   test 'should update image' do
     patch image_url(@image), params: { image: { url: @image.url } }
     assert_redirected_to image_url(@image)
+  end
+
+  test 'should render edit if image is invalid' do
+    Image.any_instance.stubs(:update).returns(false)
+
+    assert_no_difference('Image.count') do
+      patch image_url(@image), params: { image: { url: '' } }
+    end
+    assert_template :edit
   end
 
   test 'should destroy image' do

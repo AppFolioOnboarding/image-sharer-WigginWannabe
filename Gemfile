@@ -44,6 +44,9 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'minitest-rails', '~> 5.2.0'
+  gem 'mocha'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
 end
 
