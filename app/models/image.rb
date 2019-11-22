@@ -9,6 +9,7 @@
 #
 
 class Image < ApplicationRecord
-	validates :url, presence: true,
-									image: 		true
+  validates :url, presence: { message: 'URL can not be blank' },
+                  format: { with: %r{(https?://.+)\.(?:jpg|jpeg|gif|png)},
+                            message: 'That\'s not an image url!' }
 end
