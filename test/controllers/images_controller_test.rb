@@ -46,7 +46,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   test 'should update image' do
     replacement_url = images(:two).url
     original_url = @image.url
-  
+
     patch image_url(@image), params: { image: { url: replacement_url } }
 
     @image = Image.find_by(id: @image.id)
