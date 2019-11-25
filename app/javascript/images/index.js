@@ -1,5 +1,7 @@
+const Masonry = require('masonry-layout');
+
 const urlField = $('#image_url');
-const previewField = $('#image_view .show-img-card');
+const previewField = $('#image_view .img-card');
 
 function updateImagePreview() {
   previewField.attr('src', urlField.val());
@@ -8,5 +10,10 @@ function updateImagePreview() {
 $(document).ready(() => {
   updateImagePreview();
   $('#image_url').on('change keyup paste', updateImagePreview);
-});
 
+  if ($('.grid').length) {
+    new Masonry('.grid', {
+      itemSelector: '.grid-item',
+    });
+  }
+});
