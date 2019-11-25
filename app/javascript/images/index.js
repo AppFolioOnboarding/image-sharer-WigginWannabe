@@ -12,7 +12,7 @@ $(document).ready(() => {
   $('#image_url').on('change keyup paste', updateImagePreview);
 
   if ($('.grid').length) {
-    new Masonry('.grid', {
+    new Masonry('.grid', { // eslint-disable-line no-new
       itemSelector: '.grid-item',
     });
   }
