@@ -2,16 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.show-img-card {
-	max-height: 400px;
-	max-width: 400px;
-	object-fit: contain;
-	margin: auto;
+@import 'common';
+
+.img-card {
+  object-fit: contain;
+  margin: auto;
+  max-height: $imgSize;
+  max-width: $imgSize;
 }
 
 abbr[title='required'] {
-	color: red;
-	text-decoration: none !important;
+  color: red;
+  text-decoration: none !important;
 }
 
 .form-inputs {
@@ -40,10 +42,15 @@ abbr[title='required'] {
 }
 
 #image_view {
-	height: 400px;
-	width: 400px;
-	margin: auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  height: $imgSize;
+  width: $imgSize;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.grid-item {
+  max-width: $imgSize;
+}
+  padding: $mediumMargin !important;
