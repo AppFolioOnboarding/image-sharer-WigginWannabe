@@ -1,16 +1,18 @@
+@import 'common';
+
 body {
   background-color: #fff;
   color: #333;
   margin: 33px;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  line-height: 18px;
+  line-height: 1$mediumMargin;
 }
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  line-height: 18px;
+  line-height: 1$mediumMargin;
 }
 
 pre {
@@ -21,6 +23,9 @@ pre {
 
 a {
   color: #000;
+  text-decoration: none !important;
+  padding: $mediumMargin;
+  border-radius: $mediumMargin;
 
   &:visited {
     color: #666;
@@ -28,7 +33,7 @@ a {
 
   &:hover {
     color: #fff;
-    background-color: #000;
+    background-color: $hoverGrey;
   }
 }
 
@@ -51,9 +56,9 @@ div {
 }
 
 .field_with_errors {
-  padding: 8px 16px 8px 8px;
+  padding: $mediumMargin $largeMargin $mediumMargin $mediumMargin;
   background-color: rgba(255,0,0,.2);
-  border-radius: 8px;
+  border-radius: $mediumMargin;
   display: flex;
   flex-direction: column;
 }
