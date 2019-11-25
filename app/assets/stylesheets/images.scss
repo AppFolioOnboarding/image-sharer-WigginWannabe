@@ -18,27 +18,27 @@ abbr[title='required'] {
 
 .form-inputs {
 
-	& .error {
-		margin-left: 8px;
-		padding-top: 8px;
-	}
+  & .error {
+    margin-left: $mediumMargin;
+    padding-top: $mediumMargin;
+  }
 
-	& input {
-		padding: 4px;
-		width: 100%;
-		box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.4);
-		border-radius: 4px;
-	}
+  & input {
+    padding: $mediumMargin;
+    width: 100%;
+    box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.4);
+    border-radius: $mediumMargin;
+  }
 }
 
 .form-actions input[type='submit'] {
-	margin: 16px 0;
-	background-color: rgba(0,0,0,.1);
-	transition: background-color 200ms;
+  margin: $largeMargin 0;
+  background-color: rgba(0,0,0,.2);
+  transition: background-color 200ms;
 
-	&:hover {
-		background-color: rgba(0,0,0,.2);
-	}
+  &:hover {
+    background-color: $hoverGrey;
+  }
 }
 
 #image_view {
@@ -52,5 +52,11 @@ abbr[title='required'] {
 
 .grid-item {
   max-width: $imgSize;
+  margin: $mediumMargin;
 }
+
+.card-body {
+  display: flex;
+  justify-content: center;
   padding: $mediumMargin !important;
+}
