@@ -43,7 +43,15 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update image' do
-    patch image_url(@image), params: { image: { url: @image.url } }
+    replacement_url = 'https://www.gia.edu/images/polished-emerald-gem.png'
+    original_url = @image.url
+  
+    patch image_url(@image), params: { image: { url: replacement_url } }
+
+    @image = Image.find_by(id: @image.id)
+
+    assert_not_equal(original_url, @image.url)
+    assert_equal(replacement_url, @image.url)
     assert_redirected_to image_url(@image)
   end
 
