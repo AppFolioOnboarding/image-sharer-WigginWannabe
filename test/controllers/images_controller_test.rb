@@ -3,7 +3,8 @@ require 'mocha/test_unit'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @image = Image.create(url: 'https://image.pbs.org/video-assets/x1WLcZn-asset-mezzanine-16x9-6kkb4dA.jpg')
+    # @image = Image.create(url: 'https://image.pbs.org/video-assets/x1WLcZn-asset-mezzanine-16x9-6kkb4dA.jpg')
+    @image = images(:one)
   end
 
   test 'should get index' do
@@ -43,7 +44,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update image' do
-    replacement_url = 'https://www.gia.edu/images/polished-emerald-gem.png'
+    replacement_url = images(:two).url
     original_url = @image.url
   
     patch image_url(@image), params: { image: { url: replacement_url } }

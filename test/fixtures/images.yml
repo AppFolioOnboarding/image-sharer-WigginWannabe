@@ -8,10 +8,8 @@
 #  updated_at :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  url: MyString
+  url: 'https://google.com/image.png'
 
 two:
-  url: MyString
+  url: 'http://images.org/image.jpg'
