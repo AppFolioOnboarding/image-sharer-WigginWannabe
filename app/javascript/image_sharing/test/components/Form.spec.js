@@ -10,7 +10,7 @@ describe('<Form />', () => {
     const wrapper = mount(<Form />);
     const nameField = wrapper.find('#feedback_name');
 
-    assert(nameField.is('input[type=text]'));
+    assert(nameField.is('input[type="text"]'));
   });
 
   it('should have a textarea for comments', () => {
@@ -24,7 +24,7 @@ describe('<Form />', () => {
     const wrapper = mount(<Form />);
     const submitField = wrapper.find('button');
 
-    assert(submitField.is('button[type=submit]'));
-    assert.strictEqual(submitField.text(), )
+    assert(submitField.is('button[type="submit"]'));
+    assert.strictEqual(submitField.text(), 'Submit');
   });
 });
