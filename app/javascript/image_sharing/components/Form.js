@@ -30,6 +30,14 @@ export default class Form extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    $.ajax({
+      type: 'post',
+      url: '/api/feedbacks',
+      data: this.state
+    })
+    .always( () => {
+      this.setState(this.defaultState);
+    })
   }
 
   render() {
