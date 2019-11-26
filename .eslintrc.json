@@ -10,5 +10,8 @@
     "import/resolver": {
       "webpack": {}
     }
+  },
+  "env": {
+    "jquery": true
   }
 }

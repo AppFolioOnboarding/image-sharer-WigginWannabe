@@ -17,6 +17,7 @@ gem 'jquery-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'simple_form'
 gem 'webpacker', '~> 4'
 
 group :development, :test do
@@ -31,6 +32,7 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'web-console'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'annotate'
   gem 'pronto-rubocop'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -42,6 +44,9 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'minitest-rails', '~> 5.2.0'
+  gem 'mocha'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
 end
 
