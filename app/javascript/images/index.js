@@ -11,7 +11,7 @@ $(document).ready(() => {
   updateImagePreview();
   $('#image_url').on('change keyup paste', updateImagePreview);
 
-  if ($('.grid').length) {
+  if ($('.grid').length > 0) {
     new Masonry('.grid', { // eslint-disable-line no-new
       itemSelector: '.grid-item',
     });
