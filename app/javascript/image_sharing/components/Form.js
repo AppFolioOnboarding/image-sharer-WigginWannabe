@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import FlashMessage from './FlashMessage';
+
 export default class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -29,20 +31,39 @@ export default class Form extends React.Component {
   }
 
   handleSubmit(event) {
+    const feedback = {name: this.state.name, comments: this.state.comments};
     event.preventDefault();
     $.ajax({
       type: 'post',
       url: '/api/feedbacks',
-      data: this.state
+      data: { feedback: feedback },
+    })
+    .done( () => {
+      this.setState({
+        flash: {
+          type: 'success',
+          message: 'Feedback received! Thank you for your input.',
+        }
+      });
+    })
+    .fail( () => {
+      this.setState({
+        flash: {
+          type: 'danger',
+          message: 'There was a problem! :( Please try again; we want to hear what you think! (Hint: All fields are required)',
+        }
+      });
     })
     .always( () => {
       this.setState(this.defaultState);
-    })
+    });
   }
 
   render() {
+    const showFlash = (this.state.flash !== undefined);
     return (
       <form onSubmit={this.handleSubmit}>
+        <FlashMessage showFlash={showFlash} flash={this.state.flash} />
         <div className='form-group'>
           <label htmlFor='feedback_name'>Your name:</label>
           <input type='text' className='form-control' placeholder='Daenerys Targaryen'
