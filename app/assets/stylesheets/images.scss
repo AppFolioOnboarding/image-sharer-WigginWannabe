@@ -2,48 +2,61 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.show-img-card {
-	max-height: 400px;
-	max-width: 400px;
-	object-fit: contain;
-	margin: auto;
+@import 'common';
+
+.img-card {
+  object-fit: contain;
+  margin: auto;
+  max-height: $imgSize;
+  max-width: $imgSize;
 }
 
 abbr[title='required'] {
-	color: red;
-	text-decoration: none !important;
+  color: red;
+  text-decoration: none !important;
 }
 
 .form-inputs {
 
-	& .error {
-		margin-left: 8px;
-		padding-top: 8px;
-	}
+  & .error {
+    margin-left: $mediumMargin;
+    padding-top: $mediumMargin;
+  }
 
-	& input {
-		padding: 4px;
-		width: 100%;
-		box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.4);
-		border-radius: 4px;
-	}
+  & input {
+    padding: $mediumMargin;
+    width: 100%;
+    box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.4);
+    border-radius: $mediumMargin;
+  }
 }
 
 .form-actions input[type='submit'] {
-	margin: 16px 0;
-	background-color: rgba(0,0,0,.1);
-	transition: background-color 200ms;
+  margin: $largeMargin 0;
+  background-color: rgba(0,0,0,.2);
+  transition: background-color 200ms;
 
-	&:hover {
-		background-color: rgba(0,0,0,.2);
-	}
+  &:hover {
+    background-color: $hoverGrey;
+  }
 }
 
 #image_view {
-	height: 400px;
-	width: 400px;
-	margin: auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  height: $imgSize;
+  width: $imgSize;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-item {
+  max-width: $imgSize;
+  margin: $mediumMargin;
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  padding: $mediumMargin !important;
 }

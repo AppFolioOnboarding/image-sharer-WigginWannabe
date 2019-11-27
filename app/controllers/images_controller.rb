@@ -3,7 +3,7 @@ class ImagesController < ApplicationController
 
   # GET /images
   def index
-    @images = Image.all
+    @images = Image.order(created_at: :desc)
   end
 
   # GET /images/1
