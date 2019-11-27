@@ -7,13 +7,13 @@ import FlashMessage from '../../components/FlashMessage';
 
 describe('<FlashMessage />', () => {
   it('should render with success', () => {
-  	const msg = 'Success message';
-  	const flashMsg = {
-  		type: 'success',
-  		message: msg,
-  	};
+    const msg = 'Success message';
+    const flashMsg = {
+      type: 'success',
+      message: msg,
+    };
 
-    const wrapper = mount(<FlashMessage showFlash={true} flash={flashMsg} />);
+    const wrapper = mount(<FlashMessage showFlash flash={flashMsg} />);
     const alert = wrapper.find('.alert');
 
     assert.strictEqual(alert.length, 1);
@@ -22,13 +22,13 @@ describe('<FlashMessage />', () => {
   });
 
   it('should render with failure', () => {
-  	const msg = 'Failure message';
-  	const flashMsg = {
-  		type: 'danger',
-  		message: msg,
-  	};
+    const msg = 'Failure message';
+    const flashMsg = {
+      type: 'danger',
+      message: msg,
+    };
 
-    const wrapper = mount(<FlashMessage showFlash={true} flash={flashMsg} />);
+    const wrapper = mount(<FlashMessage showFlash flash={flashMsg} />);
     const alert = wrapper.find('.alert');
 
     assert.strictEqual(alert.length, 1);
@@ -37,9 +37,9 @@ describe('<FlashMessage />', () => {
   });
 
   it('should not render when showFlash is false', () => {
-  	const wrapper = mount(<FlashMessage showFlash={false} />);
+    const wrapper = mount(<FlashMessage showFlash={false} />);
     const alert = wrapper.find('.alert');
 
-  	assert.strictEqual(alert.length, 0);
+    assert.strictEqual(alert.length, 0);
   });
 });

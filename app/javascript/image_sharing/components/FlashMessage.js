@@ -3,11 +3,11 @@ import React from 'react';
 
 export default function FlashMessage(props) {
   if (!props.showFlash) {
-    return null
+    return null;
   }
 
   return (
-    <div className={ `alert alert-${props.flash.type}`} role='alert'>
+    <div className={`alert alert-${props.flash.type}`} role='alert'>
       {props.flash.message}
     </div>
   );
@@ -16,4 +16,4 @@ export default function FlashMessage(props) {
 FlashMessage.propTypes = {
   showFlash: PropTypes.bool.isRequired,
   flash: PropTypes.object
-}
+};

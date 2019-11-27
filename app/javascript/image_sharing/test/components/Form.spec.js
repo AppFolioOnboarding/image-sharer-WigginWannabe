@@ -3,21 +3,13 @@
 import assert from 'assert';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import $ from 'jquery';
+import * as helper from '../../utils/helper';
 
 import React from 'react';
 import Form from '../../components/Form';
+import FlashMessage from '../../components/FlashMessage';
 
 describe('<Form />', () => {
-
-  before( () => {
-    sinon.replace($, 'ajax', sinon.fake());
-  });
-
-  after( () => {
-    sinon.restore();
-  });
-
   it('should have a text input for name', () => {
     const wrapper = shallow(<Form />);
     const nameField = wrapper.find('#feedback_name');
@@ -27,7 +19,7 @@ describe('<Form />', () => {
 
   it('should update the name field of state when the input value changes', () => {
     const wrapper = shallow(<Form />);
-    wrapper.find('#feedback_name').simulate('change', { target: { value: 'Test Name' }});
+    wrapper.find('#feedback_name').simulate('change', { target: { value: 'Test Name' } });
 
     assert.strictEqual(wrapper.state('name'), 'Test Name');
   });
@@ -41,7 +33,7 @@ describe('<Form />', () => {
 
   it('should update the comments field of state when the textarea value changes', () => {
     const wrapper = shallow(<Form />);
-    wrapper.find('#feedback_comments').simulate('change', { target: { value: 'This is a test comment.' }});
+    wrapper.find('#feedback_comments').simulate('change', { target: { value: 'This is a test comment.' } });
 
     assert.strictEqual(wrapper.state('comments'), 'This is a test comment.');
   });
@@ -55,34 +47,49 @@ describe('<Form />', () => {
   });
 
   it('should make a post request with state information as parameters when submitted', () => {
-    const wrapper = shallow(<Form />);
-    wrapper.find('#feedback_name').simulate('change', { target: { value: 'Test Name' }});
-    wrapper.find('#feedback_comments').simulate('change', { target: { value: 'This is a test comment.' }});
-    wrapper.find('form').simulate('submit', { preventDefault: sinon.fake() });
+    const stub = sinon.stub(helper, 'post').resolves();
 
-    assert($.ajax.calledWith({
-      type: 'post',
-      url: '/api/feedbacks',
-      data: {
-        name: 'Test Name',
-        comments: 'This is a test comment.',
-      },
+    const wrapper = shallow(<Form />);
+    wrapper.find('#feedback_name').simulate('change', { target: { value: 'Test Name' } });
+    wrapper.find('#feedback_comments').simulate('change', { target: { value: 'This is a test comment.' } });
+
+    wrapper.find('form').simulate('submit', { preventDefault: () => {} });
+
+    assert(stub.calledOnce);
+    assert(stub.calledWith('/api/feedbacks', {
+      name: 'Test Name',
+      comments: 'This is a test comment.',
     }));
+
+    stub.restore();
   });
 
-  it('should clear the form if post was successful', () => {
-    // force successful post
-    // check name and comment fields empty
-    const wrapper = shallow(<Form />);
-    wrapper.find('#feedback_name').simulate('change', { target: { value: 'Test Name' }});
-    wrapper.find('#feedback_comments').simulate('change', { target: { value: 'This is a test comment.' }});
+  it('should clear the form after post', () => {
+    const stub = sinon.stub(helper, 'post').resolves();
 
-    wrapper.find('form').simulate('submit', { preventDefault: sinon.fake() });
+    const wrapper = shallow(<Form />);
+    wrapper.find('form').simulate('submit', { preventDefault: () => {} });
 
     assert.strictEqual(wrapper.find('#feedback_name').text(), '');
     assert.strictEqual(wrapper.find('#feedback_comments').text(), '');
 
-    assert.strictEqual(wrapper.state('name'), '');
-    assert.strictEqual(wrapper.state('comments'), '');
+    stub.restore();
+  });
+
+  it('should display a success flash when post is successful', () => {
+    const stub = sinon.stub(helper, 'post').resolves();
+
+    const wrapper = shallow(<Form />);
+    wrapper.find('form').simulate('submit', { preventDefault: () => {} });
+
+    console.log(wrapper.find(FlashMessage).props());
+    console.log(wrapper.state())
+    assert(wrapper.find(FlashMessage).prop('showFlash'));
+
+    stub.restore();
+  });
+
+  it('should display a failure flash when post fails', () => {
+
   });
 });

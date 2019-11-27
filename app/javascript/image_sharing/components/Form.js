@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { post } from '../utils/helper';
 
@@ -14,8 +13,8 @@ export default class Form extends React.Component {
     };
     this.state = this.defaultState;
 
-    this.setName      = this.setName.bind(this);
-    this.setComments  = this.setComments.bind(this);
+    this.setName = this.setName.bind(this);
+    this.setComments = this.setComments.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -32,21 +31,20 @@ export default class Form extends React.Component {
   }
 
   handleSubmit(event) {
-    const feedback = {name: this.state.name, comments: this.state.comments};
     event.preventDefault();
 
-    post('/api/feedbacks', {name: this.state.name, comments: this.state.comments})
-    .then( () => {
+    post('/api/feedbacks', { name: this.state.name, comments: this.state.comments })
+    .then(() => {
+      console.log('helo')
+      this.setState(this.defaultState);
       this.setState({
         flash: {
           type: 'success',
           message: 'Feedback received! Thank you for your input.',
         }
       });
-      this.setState(this.defaultState)
     })
-    .catch( (errors) => {
-      console.log(errors)
+    .catch(() => {
       this.setState({
         flash: {
           type: 'danger',
@@ -63,9 +61,15 @@ export default class Form extends React.Component {
         <FlashMessage showFlash={showFlash} flash={this.state.flash} />
         <div className='form-group'>
           <label htmlFor='feedback_name'>Your name:</label>
-          <input type='text' className='form-control' placeholder='Daenerys Targaryen'
-                 id='feedback_name' value={this.state.name} onChange={this.setName} />
-        </div> 
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Daenerys Targaryen'
+            id='feedback_name'
+            value={this.state.name}
+            onChange={this.setName}
+          />
+        </div>
 
         <div className='form-group'>
           <label htmlFor='feedback_comments'>Comments:</label>
@@ -77,3 +81,6 @@ export default class Form extends React.Component {
     );
   }
 }
+
+Form.propTypes = {};
+

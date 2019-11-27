@@ -20,7 +20,7 @@
     "chai": "^4.1.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^5.15.1",
+    "eslint": "^5.16.0",
     "eslint-config-appfolio-react": "^1.1.0",
     "ignore-styles": "^5.0.1",
     "jsdom": "^11.11.0",
@@ -32,6 +32,7 @@
   },
   "scripts": {
     "lint": "eslint app/javascript",
+    "lint:fix": "eslint --fix app/javascript",
     "test": "mocha --recursive --compilers js:babel-register --require app/javascript/testHelpers.js --require ignore-styles app/javascript/**/test"
   }
 }
