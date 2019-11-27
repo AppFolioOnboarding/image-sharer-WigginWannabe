@@ -1,4 +1,4 @@
-urls = [
+[
   'http://i.imgur.com/Wz7d2Hy.jpg',
   'https://image.pbs.org/video-assets/x1WLcZn-asset-mezzanine-16x9-6kkb4dA.jpg',
   'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/hostedimages/1379783002i/440146.jpg',
