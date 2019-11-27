@@ -38,6 +38,7 @@ export function serialize(obj, prefix) {
  * For 200 responses a Promise for the JSON is returned.  Otherwise an error is thrown
  */
 function checkResponseStatus(res) {
+  console.log(res)
   const status = res.status;
   if (status === 204) {
     return Promise.resolve(); // No content
@@ -58,13 +59,14 @@ function checkResponseStatus(res) {
         throw error;
       });
   }
-  return res.json();
+  return res;
 }
 
 /**
  * Perform an HTTP POST to the API and parse the response as JSON
  */
 export function post(path, body) {
+  console.log(JSON.stringify(body))
   return fetch(path, {
     body: JSON.stringify(body),
     credentials: 'same-origin',

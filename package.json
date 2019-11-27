@@ -10,7 +10,8 @@
     "jquery": "^3.4.1",
     "prop-types": "^15.6.1",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "assert": "^1.4.1",

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { post } from '../utils/helper';
 
 import FlashMessage from './FlashMessage';
 
@@ -33,29 +34,25 @@ export default class Form extends React.Component {
   handleSubmit(event) {
     const feedback = {name: this.state.name, comments: this.state.comments};
     event.preventDefault();
-    $.ajax({
-      type: 'post',
-      url: '/api/feedbacks',
-      data: { feedback: feedback },
-    })
-    .done( () => {
+
+    post('/api/feedbacks', {name: this.state.name, comments: this.state.comments})
+    .then( () => {
       this.setState({
         flash: {
           type: 'success',
           message: 'Feedback received! Thank you for your input.',
         }
       });
+      this.setState(this.defaultState)
     })
-    .fail( () => {
+    .catch( (errors) => {
+      console.log(errors)
       this.setState({
         flash: {
           type: 'danger',
           message: 'There was a problem! :( Please try again; we want to hear what you think! (Hint: All fields are required)',
         }
       });
-    })
-    .always( () => {
-      this.setState(this.defaultState);
     });
   }
 
