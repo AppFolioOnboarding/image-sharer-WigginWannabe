@@ -2,5 +2,11 @@
 
 <%= render 'shared/image_view', url: @image.url %>
 
+<div class='text-center'>
+	<% @image.tag_list.each do |tag| %>
+		<%= tag %> •
+	<% end %>
+</div>
+
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>
