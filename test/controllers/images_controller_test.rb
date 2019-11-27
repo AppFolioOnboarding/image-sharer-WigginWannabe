@@ -3,7 +3,6 @@ require 'mocha/test_unit'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    # @image = Image.create(url: 'https://image.pbs.org/video-assets/x1WLcZn-asset-mezzanine-16x9-6kkb4dA.jpg')
     @image = images(:one)
   end
 
@@ -19,8 +18,18 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create image' do
     assert_difference('Image.count') do
+      post images_url, params: { image: { url: @image.url, tag_list: 'example, tag' } }
+    end
+
+    assert_equal(Image.last.tag_list, ['example', 'tag'])
+    assert_redirected_to image_url(Image.last)
+  end
+
+  test 'should allow absence of tag list' do
+    assert_difference('Image.count') do
       post images_url, params: { image: { url: @image.url } }
     end
+
     assert_redirected_to image_url(Image.last)
   end
 
@@ -49,10 +58,24 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
     patch image_url(@image), params: { image: { url: replacement_url } }
 
-    @image = Image.find_by(id: @image.id)
+    @image.reload
 
     assert_not_equal(original_url, @image.url)
     assert_equal(replacement_url, @image.url)
+    assert_redirected_to image_url(@image)
+  end
+
+  test 'should update tags' do
+    original_tags = ['example', 'tag']
+    @image.tag_list = original_tags.join(', ')
+    @image.save
+
+    patch image_url(@image), params: { image: { url: @image.url, tag_list: 'newtag' } }
+
+    @image.reload
+
+    assert_not_equal(original_tags, @image.tag_list)
+    assert_equal(['newtag'], @image.tag_list)
     assert_redirected_to image_url(@image)
   end
 
