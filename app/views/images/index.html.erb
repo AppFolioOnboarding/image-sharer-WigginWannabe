@@ -5,7 +5,7 @@
 <%= link_to '+ New Image', new_image_path %>
 <div class='grid'>
   <% @images.each do |image| %>
-    <div class='card grid-item'>
+    <div class='card grid-item' data-tags='<%= image.tag_list %>'>
       <img src='<%= image.url %>' class='card-img-top img-card' alt='<%= image.url %>'>
       <div class='card-body'>
         <%= image.tag_list.join(' • ') %>
