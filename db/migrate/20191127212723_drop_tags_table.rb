@@ -1,9 +1,9 @@
 class DropTagsTable < ActiveRecord::Migration[5.2]
   def up
-  	drop_table :tags
+    drop_table :tags
   end
 
   def down
-  	raise ActiveRecord::IrreversibleMigration
+    raise ActiveRecord::IrreversibleMigration
   end
 end

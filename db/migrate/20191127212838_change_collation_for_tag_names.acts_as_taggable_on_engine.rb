@@ -1,3 +1,6 @@
+# rubocop:disable Metrics/LineLength
+# rubocop:disable Style/GuardClause
+
 # This migration comes from acts_as_taggable_on_engine (originally 5)
 # This migration is added to circumvent issue #623 and have special characters
 # work properly
@@ -13,3 +16,6 @@ ChangeCollationForTagNames.class_eval do
     end
   end
 end
+
+# rubocop:enable Metrics/LineLength
+# rubocop:enable Style/GuardClause

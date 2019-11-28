@@ -21,7 +21,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
       post images_url, params: { image: { url: @image.url, tag_list: 'example, tag' } }
     end
 
-    assert_equal(Image.last.tag_list, ['example', 'tag'])
+    assert_equal(Image.last.tag_list, %w[example tag])
     assert_redirected_to image_url(Image.last)
   end
 
@@ -66,7 +66,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update tags' do
-    original_tags = ['example', 'tag']
+    original_tags = %w[example tag]
     @image.tag_list = original_tags.join(', ')
     @image.save
 
