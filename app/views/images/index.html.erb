@@ -8,6 +8,9 @@
     <div class='card grid-item'>
       <img src='<%= image.url %>' class='card-img-top img-card' alt='<%= image.url %>'>
       <div class='card-body'>
+        <%= image.tag_list.join(' • ') %>
+      </div>
+      <div class='card-footer text-center'>
           <%= link_to 'Show', image %>
           <%= link_to 'Edit', edit_image_path(image) %>
           <%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %>
