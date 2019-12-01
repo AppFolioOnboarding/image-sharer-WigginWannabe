@@ -3,12 +3,20 @@
 
 <h1>Images</h1>
 <%= link_to '+ New Image', new_image_path %>
+<button id='clear_filter_btn'>Clear filters X</button>
 <div class='grid'>
   <% @images.each do |image| %>
     <div class='card grid-item' data-tags='<%= image.tag_list %>'>
       <img src='<%= image.url %>' class='card-img-top img-card' alt='<%= image.url %>'>
       <div class='card-body'>
-        <%= image.tag_list.join(' • ') %>
+        <% image.tag_list[0...-1].each do |tag| %>
+          <span class='image-tag'>
+            <%= tag %>
+          </span>&nbsp;•&nbsp;
+        <% end %>
+        <span class='image-tag'>
+          <%= image.tag_list.last %>
+        </span>
       </div>
       <div class='card-footer text-center'>
           <%= link_to 'Show', image %>
