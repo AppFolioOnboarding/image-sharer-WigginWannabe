@@ -3,9 +3,7 @@
 <%= render 'shared/image_view', url: @image.url %>
 
 <div class='text-center'>
-	<% @image.tag_list.each do |tag| %>
-		<%= tag %> •
-	<% end %>
+  <%= @image.tag_list.join(' • ') %>
 </div>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
