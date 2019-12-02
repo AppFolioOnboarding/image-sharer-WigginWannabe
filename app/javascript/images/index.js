@@ -10,10 +10,7 @@ function updateImagePreview() {
 }
 
 function retrieveTags(img) {
-  let imageTags = img.data('tags');
-  if (!imageTags) imageTags = [];
-  else imageTags = imageTags.split(',');
-  return imageTags.map(tag => tag.trim());
+  return (img.data('tags') || '').split(',').map(tag => tag.trim());
 }
 
 function filterImages(tag) {
