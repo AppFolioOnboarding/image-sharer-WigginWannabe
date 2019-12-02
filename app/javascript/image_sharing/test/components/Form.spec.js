@@ -3,14 +3,13 @@
 import assert from 'assert';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import * as helper from '../../utils/helper';
-
 import React from 'react';
+
+import * as helper from '../../utils/helper';
 import Form from '../../components/Form';
 import FlashMessage from '../../components/FlashMessage';
 
 describe('<Form />', () => {
-
   it('should have a text input for name', () => {
     const wrapper = shallow(<Form />);
     const nameField = wrapper.find('#feedback_name');
@@ -61,7 +60,7 @@ describe('<Form />', () => {
       name: 'Test Name',
       comments: 'This is a test comment.',
     }));
-    
+
     stub.restore();
   });
 
@@ -85,7 +84,7 @@ describe('<Form />', () => {
 
     assert(wrapper.find(FlashMessage).prop('showFlash'));
     assert.equal(wrapper.find(FlashMessage).prop('flash').type, 'success');
-    
+
     stub.restore();
   });
 
