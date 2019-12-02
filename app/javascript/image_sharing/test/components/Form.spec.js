@@ -10,6 +10,7 @@ import Form from '../../components/Form';
 import FlashMessage from '../../components/FlashMessage';
 
 describe('<Form />', () => {
+
   it('should have a text input for name', () => {
     const wrapper = shallow(<Form />);
     const nameField = wrapper.find('#feedback_name');
@@ -21,7 +22,7 @@ describe('<Form />', () => {
     const wrapper = shallow(<Form />);
     wrapper.find('#feedback_name').simulate('change', { target: { value: 'Test Name' } });
 
-    assert.strictEqual(wrapper.state('name'), 'Test Name');
+    assert.equal(wrapper.state('name'), 'Test Name');
   });
 
   it('should have a textarea for comments', () => {
@@ -35,7 +36,7 @@ describe('<Form />', () => {
     const wrapper = shallow(<Form />);
     wrapper.find('#feedback_comments').simulate('change', { target: { value: 'This is a test comment.' } });
 
-    assert.strictEqual(wrapper.state('comments'), 'This is a test comment.');
+    assert.equal(wrapper.state('comments'), 'This is a test comment.');
   });
 
   it('should have a submit button', () => {
@@ -43,7 +44,7 @@ describe('<Form />', () => {
     const submitField = wrapper.find('button');
 
     assert(submitField.is('button[type="submit"]'));
-    assert.strictEqual(submitField.text(), 'Submit');
+    assert.equal(submitField.text(), 'Submit');
   });
 
   it('should make a post request with state information as parameters when submitted', () => {
@@ -60,36 +61,44 @@ describe('<Form />', () => {
       name: 'Test Name',
       comments: 'This is a test comment.',
     }));
+    
+    stub.restore();
+  });
+
+  it('should clear the form after post', async () => {
+    const stub = sinon.stub(helper, 'post').resolves();
+
+    const wrapper = shallow(<Form />);
+    await wrapper.instance().handleSubmit({ preventDefault: () => {} });
+
+    assert.equal(wrapper.find('#feedback_name').text(), '');
+    assert.equal(wrapper.find('#feedback_comments').text(), '');
 
     stub.restore();
   });
 
-  it('should clear the form after post', () => {
+  it('should display a success flash when post is successful', async () => {
     const stub = sinon.stub(helper, 'post').resolves();
 
     const wrapper = shallow(<Form />);
-    wrapper.find('form').simulate('submit', { preventDefault: () => {} });
+    await wrapper.instance().handleSubmit({ preventDefault: () => {} });
 
-    assert.strictEqual(wrapper.find('#feedback_name').text(), '');
-    assert.strictEqual(wrapper.find('#feedback_comments').text(), '');
-
-    stub.restore();
-  });
-
-  it('should display a success flash when post is successful', () => {
-    const stub = sinon.stub(helper, 'post').resolves();
-
-    const wrapper = shallow(<Form />);
-    wrapper.find('form').simulate('submit', { preventDefault: () => {} });
-
-    console.log(wrapper.find(FlashMessage).props());
-    console.log(wrapper.state())
     assert(wrapper.find(FlashMessage).prop('showFlash'));
-
+    assert.equal(wrapper.find(FlashMessage).prop('flash').type, 'success');
+    
     stub.restore();
   });
 
-  it('should display a failure flash when post fails', () => {
+  it('should display a failure flash when post fails', async () => {
+    const stub = sinon.stub(helper, 'post').rejects();
 
+    const wrapper = shallow(<Form />);
+    await wrapper.instance().handleSubmit({ preventDefault: () => {} });
+
+    setTimeout(() => {
+      assert(wrapper.find(FlashMessage).prop('showFlash'));
+      assert.equal(wrapper.find(FlashMessage).prop('flash').type, 'danger');
+      stub.restore();
+    }, 0);
   });
 });
