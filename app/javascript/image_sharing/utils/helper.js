@@ -58,7 +58,7 @@ function checkResponseStatus(res) {
         throw error;
       });
   }
-  return res.json();
+  return res;
 }
 
 /**
