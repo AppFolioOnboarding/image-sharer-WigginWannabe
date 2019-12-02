@@ -35,13 +35,12 @@ export default class Form extends React.Component {
 
     post('/api/feedbacks', { name: this.state.name, comments: this.state.comments })
       .then(() => {
-        this.setState({
+        this.setState(...this.defaultState, {
           flash: {
             type: 'success',
             message: 'Feedback received! Thank you for your input.',
           }
         });
-        this.setState(this.defaultState);
       })
       .catch(() => {
         this.setState({
