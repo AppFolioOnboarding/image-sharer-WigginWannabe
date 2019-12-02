@@ -30,6 +30,24 @@ export default class Form extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    
+    post('/api/feedbacks', { name: this.state.name, comments: this.state.comments })
+      .then(() => {
+        this.setState(...this.defaultState, {
+          flash: {
+            type: 'success',
+            message: 'Feedback received! Thank you for your input.',
+          }
+        });
+      })
+      .catch(() => {
+        this.setState({
+          flash: {
+            type: 'danger',
+            message: 'There was a problem! :( Please try again; we want to hear what you think! (Hint: All fields are required)',
+          }
+        });
+      });
   }
 
   render() {
